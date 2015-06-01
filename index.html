@@ -1,0 +1,155 @@
+<html ng-app="myForm">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angularjs表单验证</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <script src="http://cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/angular.js/1.2.0/angular.min.js"></script>
+    <script src="controller.js"></script>
+      <style type="text/css">
+      	input.ng-invalid {
+    	  /*border: 1px solid red;*/
+    	}
+    	input.ng-valid {
+    	  border: 1px solid green;
+    	}
+	  	textarea.ng-invalid {
+		  /*border: 1px solid red;*/
+		}
+		textarea.ng-valid {
+		  border: 1px solid green;
+		}
+    	.error{color: #ff0000; line-height: 24px;}
+    </style>
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<form name="form1" class="form-horizontal" ng-controller="FormController">
+		  <fieldset>
+		    <legend>AngularJS 表单验证</legend>
+		    <div class="form-group">
+		      <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+		      <div class="col-lg-10">
+		        <input type="email" class="form-control" id="inputEmail" placeholder="Email" ng-minlength="3" ng-maxlength="20" name="email" ng-model="formDate.email" required/>
+		        <div class="error" ng-show="form1.email.$dirty && form1.email.$invalid">
+		        	<small class="error" 
+		        	     ng-show="form1.email.$error.required">
+		        	     必填项 
+		        	</small>
+		        	<small class="error" 
+		        	     ng-show="form1.email.$error.minlength">
+		        	     最少3个字符
+		        	</small>
+		        	<small class="error" 
+		        	     ng-show="form1.email.$error.email">
+		        	     邮件格式不对
+		        	</small>		        	
+		        	<small class="error" 
+		        	     ng-show="form1.email.$error.maxlength">
+		        	     最多20个字符
+		        	</small>
+		        </div>
+		      </div>
+		    </div>
+		    <div class="form-group">
+		      <label for="username" class="col-lg-2 control-label">UserName</label>
+		      <div class="col-lg-10">
+		        <input type="text" class="form-control" id="username" placeholder="Username" ng-minlength="3" ng-maxlength="20" ng-pattern="/^[0-9a-zA-Z]+$/" name="username" ng-model="formDate.username" required/>
+		        <div class="error" ng-show="form1.username.$dirty && form1.username.$invalid">
+		        	<small class="error" 
+		        	     ng-show="form1.username.$error.required">
+		        	     必填项 
+		        	</small>
+		        	<small class="error" 
+		        	     ng-show="form1.username.$error.minlength">
+		        	     最少3个字符
+		        	</small>
+		        	<small class="error" 
+		        	     ng-show="form1.username.$error.pattern">
+		        	     必须是0-9或a-z或A-Z，不可有特殊符号
+		        	</small>		        	
+		        	<small class="error" 
+		        	     ng-show="form1.username.$error.maxlength">
+		        	     最多20个字符
+		        	</small>
+		        </div>
+		      </div>
+		    </div>
+		    <div class="form-group">
+		      <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+		      <div class="col-lg-10">
+		        <input type="password" name="password" ng-model="formDate.password" class="form-control" id="inputPassword" placeholder="Password" ng-minlength="6" ng-maxlength="8" ng-pattern="/^[0-9a-zA-Z]+$/" required>
+		        <div class="error" ng-show="form1.password.$dirty && form1.password.$invalid">
+		        	<small class="error" 
+		        	     ng-show="form1.password.$error.required">
+		        	     必填项 
+		        	</small>
+		        	<small class="error" 
+		        	     ng-show="form1.password.$error.minlength">
+		        	     最少6位
+		        	</small>
+		        	<small class="error" 
+		        	     ng-show="form1.password.$error.pattern">
+		        	     必须为数字
+		        	</small>
+		        	<small class="error" 
+		        	     ng-show="form1.password.$error.maxlength">
+		        	     最多8位
+		        	</small>
+		        </div>
+		        <div class="checkbox">
+		          <label>
+		            <input type="checkbox"> Checkbox
+		          </label>
+		        </div>
+		      </div>
+		    </div>
+		    <div class="form-group">
+		      <label for="textArea" class="col-lg-2 control-label">Textarea</label>
+		      <div class="col-lg-10">
+		        <textarea class="form-control" rows="3" id="textArea" name="textArea" ng-model="formDate.textArea" required></textarea>
+		        <div class="error" ng-show="form1.textArea.$dirty && form1.textArea.$invalid">
+		        	<small class="error" 
+		        	     ng-show="form1.textArea.$error.required">
+		        	     必填项 
+		        	</small>
+		        </div>
+		      </div>
+		    </div>
+		    <div class="form-group">
+		      <label class="col-lg-2 control-label">Radios</label>
+		      <div class="col-lg-10">
+		        <div class="radio">
+		          <label>
+		            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+		            Boy
+		          </label>
+		        </div>
+		        <div class="radio">
+		          <label>
+		            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+		            Girl
+		          </label>
+		        </div>
+		      </div>
+		    </div>
+		    <div class="form-group">
+		      <label for="category" class="col-lg-2 control-label">Selects</label>
+		      <div class="col-lg-10">
+		      	<select class="form-control" ng-model="color" ng-options="c.name for c in category"></select>
+		      </div>
+		    </div>
+		    <div class="form-group">
+		      <div class="col-lg-10 col-lg-offset-2">
+		        <button type="reset" class="btn btn-default">Cancel</button>
+		        <button type="submit" class="btn btn-primary">Submit</button>
+		      </div>
+		    </div>
+		  </fieldset>
+		</form>	
+	</div>
+</div>
+</body>
+</html>
